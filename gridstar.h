@@ -3,9 +3,7 @@
 
 #include <QObject>
 #include <QWidget>
-#include <QGridLayout>
 #include <QList>
-#include <QDebug>
 
 class GridDefinition
 {
