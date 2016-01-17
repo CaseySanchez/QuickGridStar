@@ -11,8 +11,9 @@ class GridDefinition
 
     struct GridCell
     {
-        float _weight;
-        float _offset;
+        float
+            _weight,
+            _offset;
 
         GridCell(float weight, float offset) :
             _weight(weight),
@@ -112,7 +113,7 @@ public:
     int count() const;
 
 private:
-    void applyBounds(int &row, int &column, int &rowSpan, int &columnSpan);
+    void calculateSpan(int &row, int &column, int &rowSpan, int &columnSpan);
 };
 
 #endif // GRIDSTAR_H
