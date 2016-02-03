@@ -51,7 +51,7 @@ void QuickGridStar::componentComplete()
             QuickGridStarAttached
                 *attached = qobject_cast<QuickGridStarAttached *>(qmlAttachedPropertiesObject<QuickGridStar>(child));
 
-            _gridDefinition.calculateSpan(attached->_row, attached->_column, attached->_rowSpan, attached->_columnSpan);
+            _gridDefinition.calculateBounds(attached->_row, attached->_column, attached->_rowSpan, attached->_columnSpan);
 
             _items << new QuickGridItem(child, attached->_row, attached->_column, attached->_rowSpan, attached->_columnSpan);
         }
