@@ -194,7 +194,7 @@ int GridStarLayout::count() const
     return _items.size();
 }
 
-void GridStarLayout::applyBounds(int &row, int &column, int &rowSpan, int &columnSpan)
+void GridStarLayout::calculateSpan(int &row, int &column, int &rowSpan, int &columnSpan)
 {
     int
         rowCount = _gridDefinition.rowCount(),
