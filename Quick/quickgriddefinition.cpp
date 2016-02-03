@@ -8,7 +8,7 @@ QuickGridDefinition::QuickGridDefinition() :
 {
 }
 
-void QuickGridDefinition::addRowDefinition(float size)
+void QuickGridDefinition::addRowDefinition(qreal size)
 {
     _rows << QuickGridCell(size, _rowSize);
 
@@ -16,7 +16,7 @@ void QuickGridDefinition::addRowDefinition(float size)
     _invRowSize = 1.0f / _rowSize;
 }
 
-void QuickGridDefinition::addColumnDefinition(float size)
+void QuickGridDefinition::addColumnDefinition(qreal size)
 {
     _columns << QuickGridCell(size, _columnSize);
 
@@ -34,22 +34,22 @@ int QuickGridDefinition::columnCount() const
     return _columns.size();
 }
 
-float QuickGridDefinition::rowOffset(int index)
+qreal QuickGridDefinition::rowOffset(int index)
 {
     return _rows[index]._offset * _invRowSize;
 }
 
-float QuickGridDefinition::columnOffset(int index)
+qreal QuickGridDefinition::columnOffset(int index)
 {
     return _columns[index]._offset * _invColumnSize;
 }
 
-float QuickGridDefinition::rowWeight(int index)
+qreal QuickGridDefinition::rowWeight(int index)
 {
     return _rows[index]._weight * _invRowSize;
 }
 
-float QuickGridDefinition::columnWeight(int index)
+qreal QuickGridDefinition::columnWeight(int index)
 {
     return _columns[index]._weight * _invColumnSize;
 }
