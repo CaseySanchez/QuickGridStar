@@ -9,11 +9,11 @@ class QuickGridDefinition
 {
     struct QuickGridCell
     {
-        float
+        qreal
             _weight,
             _offset;
 
-        QuickGridCell(float weight, float offset) :
+        QuickGridCell(qreal weight, qreal offset) :
             _weight(weight),
             _offset(offset)
         {
@@ -24,7 +24,7 @@ class QuickGridDefinition
         _rows,
         _columns;
 
-    float
+    qreal
         _rowSize,
         _columnSize,
         _invRowSize,
@@ -33,17 +33,17 @@ class QuickGridDefinition
 public:
     QuickGridDefinition();
 
-    void addRowDefinition(float size = 1.0f);
-    void addColumnDefinition(float size = 1.0f);
+    void addRowDefinition(qreal size = 1.0f);
+    void addColumnDefinition(qreal size = 1.0f);
 
     int rowCount() const;
     int columnCount() const;
 
-    float rowOffset(int index);
-    float columnOffset(int index);
+    qreal rowOffset(int index);
+    qreal columnOffset(int index);
 
-    float rowWeight(int index);
-    float columnWeight(int index);
+    qreal rowWeight(int index);
+    qreal columnWeight(int index);
 
     QPointF cellPoint(QRectF rect, int row, int column);
     QSizeF cellSize(QRectF rect, int row, int column, int rowSpan, int columnSpan);
