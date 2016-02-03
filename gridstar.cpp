@@ -24,7 +24,7 @@ void GridStarLayout::addItem(QLayoutItem *item)
 
 void GridStarLayout::addWidget(QWidget *widget, int row, int column, int rowSpan, int columnSpan)
 {
-    _gridDefinition.calculateSpan(row, column, rowSpan, columnSpan);
+    _gridDefinition.calculateBounds(row, column, rowSpan, columnSpan);
 
     widget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
@@ -33,7 +33,7 @@ void GridStarLayout::addWidget(QWidget *widget, int row, int column, int rowSpan
 
 QWidget *GridStarLayout::addLayout(QLayout *layout, int row, int column, int rowSpan, int columnSpan)
 {
-    _gridDefinition.calculateSpan(row, column, rowSpan, columnSpan);
+    _gridDefinition.calculateBounds(row, column, rowSpan, columnSpan);
 
     QWidget *widget = new QWidget();
 
