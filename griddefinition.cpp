@@ -81,3 +81,26 @@ QRect GridDefinition::cellRect(QRect rect, int row, int column, int rowSpan, int
 {
     return QRect(cellPoint(rect, row, column), cellSize(rect, row, column, rowSpan, columnSpan));
 }
+
+void GridDefinition::calculateSpan(int row, int column, int &rowSpan, int &columnSpan)
+{
+    int
+        rowSize = rowCount(),
+        columnSize = columnCount();
+
+    row = qBound(0, row, rowSize - 1);
+    column = qBound(0, column, columnSize - 1);
+
+    if(rowSpan <= 0)
+    {
+        rowSpan = rowSize - row + rowSpan;
+    }
+
+    if(columnSpan <= 0)
+    {
+        columnSpan = columnSize - column + columnSpan;
+    }
+
+    rowSpan = qBound(1, rowSpan, rowSize - row);
+    columnSpan = qBound(1, columnSpan, columnSize - column);
+}
