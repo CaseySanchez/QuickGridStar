@@ -24,7 +24,7 @@ void GridStarLayout::addItem(QLayoutItem *item)
 
 void GridStarLayout::addWidget(QWidget *widget, int row, int column, int rowSpan, int columnSpan)
 {
-    calculateSpan(row, column, rowSpan, columnSpan);
+    _gridDefinition.calculateSpan(row, column, rowSpan, columnSpan);
 
     widget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
@@ -33,7 +33,7 @@ void GridStarLayout::addWidget(QWidget *widget, int row, int column, int rowSpan
 
 QWidget *GridStarLayout::addLayout(QLayout *layout, int row, int column, int rowSpan, int columnSpan)
 {
-    calculateSpan(row, column, rowSpan, columnSpan);
+    _gridDefinition.calculateSpan(row, column, rowSpan, columnSpan);
 
     QWidget *widget = new QWidget();
 
@@ -110,27 +110,4 @@ QLayoutItem *GridStarLayout::takeAt(int index)
 int GridStarLayout::count() const
 {
     return _items.size();
-}
-
-void GridStarLayout::calculateSpan(int &row, int &column, int &rowSpan, int &columnSpan)
-{
-    int
-        rowCount = _gridDefinition.rowCount(),
-        columnCount = _gridDefinition.columnCount();
-
-    row = qBound(0, row, rowCount - 1);
-    column = qBound(0, column, columnCount - 1);
-
-    if(rowSpan <= 0)
-    {
-        rowSpan = rowCount - row + rowSpan;
-    }
-
-    if(columnSpan <= 0)
-    {
-        columnSpan = columnCount - column + columnSpan;
-    }
-
-    rowSpan = qBound(1, rowSpan, rowCount - row);
-    columnSpan = qBound(1, columnSpan, columnCount - column);
 }
