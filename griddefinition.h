@@ -46,6 +46,8 @@ public:
     QPoint cellPoint(QRect rect, int row, int column);
     QSize cellSize(QRect rect, int row, int column, int rowSpan, int columnSpan);
     QRect cellRect(QRect rect, int row, int column, int rowSpan = 1, int columnSpan = 1);
+
+    void calculateSpan(int row, int column, int &rowSpan, int &columnSpan);
 };
 
 #endif // GRIDDEFINITION_H
