@@ -1,10 +1,16 @@
 #include "quickgridstar.h"
 
-QuickGridStarAttached::QuickGridStarAttached(QObject *object) : QObject(object)
+QuickGridStarAttached::QuickGridStarAttached(QObject *object) :
+    QObject(object),
+    _row(0),
+    _column(0),
+    _rowSpan(1),
+    _columnSpan(1)
 {
 }
 
-QuickGridStar::QuickGridStar(QQuickItem *parent) : QQuickItem(parent)
+QuickGridStar::QuickGridStar(QQuickItem *parent) :
+    QQuickItem(parent)
 {
 }
 
@@ -85,10 +91,12 @@ QuickGridStarAttached *QuickGridStar::qmlAttachedProperties(QObject *object)
     return new QuickGridStarAttached(object);
 }
 
-QuickRowDefinition::QuickRowDefinition(QQuickItem *parent) : QQuickItem(parent)
+QuickRowDefinition::QuickRowDefinition(QQuickItem *parent) :
+    QQuickItem(parent)
 {
 }
 
-QuickColumnDefinition::QuickColumnDefinition(QQuickItem *parent) : QQuickItem(parent)
+QuickColumnDefinition::QuickColumnDefinition(QQuickItem *parent) :
+    QQuickItem(parent)
 {
 }
