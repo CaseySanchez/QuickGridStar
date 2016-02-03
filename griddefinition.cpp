@@ -8,7 +8,7 @@ GridDefinition::GridDefinition() :
 {
 }
 
-void GridDefinition::addRowDefinition(float size)
+void GridDefinition::addRowDefinition(qreal size)
 {
     _rows << GridCell(size, _rowSize);
 
@@ -16,7 +16,7 @@ void GridDefinition::addRowDefinition(float size)
     _invRowSize = 1.0f / _rowSize;
 }
 
-void GridDefinition::addColumnDefinition(float size)
+void GridDefinition::addColumnDefinition(qreal size)
 {
     _columns << GridCell(size, _columnSize);
 
@@ -34,22 +34,22 @@ int GridDefinition::columnCount() const
     return _columns.size();
 }
 
-float GridDefinition::rowOffset(int index)
+qreal GridDefinition::rowOffset(int index)
 {
     return _rows[index]._offset * _invRowSize;
 }
 
-float GridDefinition::columnOffset(int index)
+qreal GridDefinition::columnOffset(int index)
 {
     return _columns[index]._offset * _invColumnSize;
 }
 
-float GridDefinition::rowWeight(int index)
+qreal GridDefinition::rowWeight(int index)
 {
     return _rows[index]._weight * _invRowSize;
 }
 
-float GridDefinition::columnWeight(int index)
+qreal GridDefinition::columnWeight(int index)
 {
     return _columns[index]._weight * _invColumnSize;
 }
