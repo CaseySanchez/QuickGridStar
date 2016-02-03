@@ -3,6 +3,7 @@
 
 #include <QQuickItem>
 #include <QQuickWindow>
+#include <QDebug>
 
 #include "quickgriddefinition.h"
 
