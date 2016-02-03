@@ -82,7 +82,7 @@ QRect GridDefinition::cellRect(QRect rect, int row, int column, int rowSpan, int
     return QRect(cellPoint(rect, row, column), cellSize(rect, row, column, rowSpan, columnSpan));
 }
 
-void GridDefinition::calculateSpan(int row, int column, int &rowSpan, int &columnSpan)
+void GridDefinition::calculateBounds(int row, int column, int &rowSpan, int &columnSpan)
 {
     int
         rowSize = rowCount(),
