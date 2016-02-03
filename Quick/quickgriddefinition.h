@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QWidget>
 #include <QList>
+#include <QDebug>
 
 class QuickGridDefinition
 {
@@ -49,7 +50,7 @@ public:
     QSizeF cellSize(QRectF rect, int row, int column, int rowSpan, int columnSpan);
     QRectF cellRect(QRectF rect, int row, int column, int rowSpan = 1, int columnSpan = 1);
 
-    void calculateSpan(int row, int column, int &rowSpan, int &columnSpan);
+    void calculateBounds(int &row, int &column, int &rowSpan, int &columnSpan);
 };
 
 #endif // QUICKGRIDDEFINITION_H
