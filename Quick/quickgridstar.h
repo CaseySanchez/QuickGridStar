@@ -9,6 +9,8 @@
 
 class QuickGridStarAttached : public QObject
 {
+    friend class QuickGridStar;
+
     Q_OBJECT
 
     Q_PROPERTY(int row MEMBER _row)
@@ -19,6 +21,7 @@ class QuickGridStarAttached : public QObject
 public:
     QuickGridStarAttached(QObject *object);
 
+protected:
     int
         _row,
         _column,
@@ -72,13 +75,13 @@ class QuickRowDefinition : public QQuickItem
 
     Q_OBJECT
 
-    Q_PROPERTY(float weight MEMBER _weight)
+    Q_PROPERTY(qreal weight MEMBER _weight)
 
 public:
     QuickRowDefinition(QQuickItem *parent = 0);
 
 protected:
-    float
+    qreal
         _weight;
 };
 
@@ -88,13 +91,13 @@ class QuickColumnDefinition : public QQuickItem
 
     Q_OBJECT
 
-    Q_PROPERTY(float weight MEMBER _weight)
+    Q_PROPERTY(qreal weight MEMBER _weight)
 
 public:
     QuickColumnDefinition(QQuickItem *parent = 0);
 
 protected:
-    float
+    qreal
         _weight;
 };
 
