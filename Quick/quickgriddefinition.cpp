@@ -82,7 +82,7 @@ QRectF QuickGridDefinition::cellRect(QRectF rect, int row, int column, int rowSp
     return QRectF(cellPoint(rect, row, column), cellSize(rect, row, column, rowSpan, columnSpan));
 }
 
-void QuickGridDefinition::calculateSpan(int row, int column, int &rowSpan, int &columnSpan)
+void QuickGridDefinition::calculateBounds(int &row, int &column, int &rowSpan, int &columnSpan)
 {
     int
         rowSize = rowCount(),
