@@ -33,7 +33,7 @@ void GridStarLayout::addWidget(QWidget *widget, int row, int column, int rowSpan
 
 QWidget *GridStarLayout::addLayout(QLayout *layout, int row, int column, int rowSpan, int columnSpan)
 {
-    applyBounds(row, column, rowSpan, columnSpan);
+    calculateSpan(row, column, rowSpan, columnSpan);
 
     QWidget *widget = new QWidget();
 
