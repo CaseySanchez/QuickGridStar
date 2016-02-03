@@ -7,8 +7,6 @@
 
 class GridDefinition
 {
-    friend class GridStarLayout;
-
     struct GridCell
     {
         float
@@ -38,7 +36,6 @@ public:
     void addRowDefinition(float size = 1.0f);
     void addColumnDefinition(float size = 1.0f);
 
-protected:
     int rowCount() const;
     int columnCount() const;
 
