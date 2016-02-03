@@ -66,9 +66,6 @@ public:
     QLayoutItem *itemAt(int index) const;
     QLayoutItem *takeAt(int index);
     int count() const;
-
-private:
-    void calculateSpan(int &row, int &column, int &rowSpan, int &columnSpan);
 };
 
 #endif // GRIDSTAR_H
