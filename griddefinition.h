@@ -7,11 +7,11 @@ class GridDefinition
 {
     struct GridCell
     {
-        float
+        qreal
             _weight,
             _offset;
 
-        GridCell(float weight, float offset) :
+        GridCell(qreal weight, qreal offset) :
             _weight(weight),
             _offset(offset)
         {
@@ -22,7 +22,7 @@ class GridDefinition
         _rows,
         _columns;
 
-    float
+    qreal
         _rowSize,
         _columnSize,
         _invRowSize,
@@ -31,17 +31,17 @@ class GridDefinition
 public:
     GridDefinition();
 
-    void addRowDefinition(float size = 1.0f);
-    void addColumnDefinition(float size = 1.0f);
+    void addRowDefinition(qreal size = 1.0f);
+    void addColumnDefinition(qreal size = 1.0f);
 
     int rowCount() const;
     int columnCount() const;
 
-    float rowOffset(int index);
-    float columnOffset(int index);
+    qreal rowOffset(int index);
+    qreal columnOffset(int index);
 
-    float rowWeight(int index);
-    float columnWeight(int index);
+    qreal rowWeight(int index);
+    qreal columnWeight(int index);
 
     QPoint cellPoint(QRect rect, int row, int column);
     QSize cellSize(QRect rect, int row, int column, int rowSpan, int columnSpan);
