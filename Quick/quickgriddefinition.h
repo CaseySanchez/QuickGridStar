@@ -4,7 +4,6 @@
 #include <QObject>
 #include <QWidget>
 #include <QList>
-#include <QDebug>
 
 class QuickGridDefinition
 {
