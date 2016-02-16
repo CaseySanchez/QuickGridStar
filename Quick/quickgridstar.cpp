@@ -1,5 +1,17 @@
 #include "quickgridstar.h"
 
+QuickRowDefinition::QuickRowDefinition(QQuickItem *parent) :
+    QQuickItem(parent),
+    _weight(1.0f)
+{
+}
+
+QuickColumnDefinition::QuickColumnDefinition(QQuickItem *parent) :
+    QQuickItem(parent),
+    _weight(1.0f)
+{
+}
+
 QuickGridStarAttached::QuickGridStarAttached(QObject *object) :
     QObject(object),
     _row(0),
@@ -35,28 +47,53 @@ void QuickGridStar::componentComplete()
         if(!className.compare("QuickRowDefinition"))
         {
             QuickRowDefinition
-                *def = qobject_cast<QuickRowDefinition *>(child);
+                *definition = qobject_cast<QuickRowDefinition *>(child);
 
-            _gridDefinition.addRowDefinition(def->_weight);
+            _gridDefinition.addRowDefinition(definition->_weight);
         }
         else if(!className.compare("QuickColumnDefinition"))
         {
             QuickColumnDefinition
-                *def = qobject_cast<QuickColumnDefinition *>(child);
+                *definition = qobject_cast<QuickColumnDefinition *>(child);
 
-            _gridDefinition.addColumnDefinition(def->_weight);
+            _gridDefinition.addColumnDefinition(definition->_weight);
         }
         else
         {
             QuickGridStarAttached
                 *attached = qobject_cast<QuickGridStarAttached *>(qmlAttachedPropertiesObject<QuickGridStar>(child));
 
-            _gridDefinition.calculateBounds(attached->_row, attached->_column, attached->_rowSpan, attached->_columnSpan);
-
             _items << new QuickGridItem(child, attached->_row, attached->_column, attached->_rowSpan, attached->_columnSpan);
         }
     }
 
+    for(QuickGridItem *item : _items)
+    {
+        _gridDefinition.calculateBounds(item->_row, item->_column, item->_rowSpan, item->_columnSpan);
+    }
+
+    QQuickItem::componentComplete();
+}
+
+void QuickGridStar::itemChange(ItemChange change, const ItemChangeData &value)
+{
+    QCoreApplication::postEvent(this, new QEvent(QEvent::LayoutRequest));
+
+    QQuickItem::itemChange(change, value);
+}
+
+bool QuickGridStar::event(QEvent *e)
+{
+    if(e->type() == QEvent::LayoutRequest)
+    {
+        updateGeometry();
+    }
+
+    return QQuickItem::event(e);
+}
+
+void QuickGridStar::updateGeometry()
+{
     QRectF
         rect;
 
@@ -64,15 +101,12 @@ void QuickGridStar::componentComplete()
     {
         QQuickWindow
             *p = qobject_cast<QQuickWindow *>(parent());
-
-        rect = QRectF(p->position(), QSizeF(p->width(), p->height()));
+        
+        rect = QRectF(QPointF(0.f, 0.f), QSizeF(p->width(), p->height()));
     }
     else
     {
-        QQuickItem
-            *p = qobject_cast<QQuickItem *>(parent());
-
-        rect = QRectF(p->position(), QSizeF(p->width(), p->height()));
+        rect = QRectF(QPointF(0.f, 0.f), QSizeF(width(), height()));
     }
 
     for(QuickGridItem *item : _items)
@@ -84,8 +118,6 @@ void QuickGridStar::componentComplete()
         item->_item->setWidth(cellRect.width());
         item->_item->setHeight(cellRect.height());
     }
-
-    QQuickItem::componentComplete();
 }
 
 QuickGridStarAttached *QuickGridStar::qmlAttachedProperties(QObject *object)
@@ -93,12 +125,9 @@ QuickGridStarAttached *QuickGridStar::qmlAttachedProperties(QObject *object)
     return new QuickGridStarAttached(object);
 }
 
-QuickRowDefinition::QuickRowDefinition(QQuickItem *parent) :
-    QQuickItem(parent)
+void QuickGridStar::registerTypes()
 {
-}
-
-QuickColumnDefinition::QuickColumnDefinition(QQuickItem *parent) :
-    QQuickItem(parent)
-{
+    qmlRegisterType<QuickGridStar>("com.quick.gridStar", 1, 0, "GridStar");
+    qmlRegisterType<QuickRowDefinition>("com.quick.gridStar", 1, 0, "RowDefinition");
+    qmlRegisterType<QuickColumnDefinition>("com.quick.gridStar", 1, 0, "ColumnDefinition");
 }
