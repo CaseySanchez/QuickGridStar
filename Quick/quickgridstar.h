@@ -3,8 +3,43 @@
 
 #include <QQuickItem>
 #include <QQuickWindow>
+#include <QDebug>
 
 #include "quickgriddefinition.h"
+
+class QuickGridStar;
+
+class QuickRowDefinition : public QQuickItem
+{
+    friend class QuickGridStar;
+
+    Q_OBJECT
+
+    Q_PROPERTY(qreal weight MEMBER _weight)
+
+public:
+    QuickRowDefinition(QQuickItem *parent = 0);
+
+protected:
+    qreal
+        _weight;
+};
+
+class QuickColumnDefinition : public QQuickItem
+{
+    friend class QuickGridStar;
+
+    Q_OBJECT
+
+    Q_PROPERTY(qreal weight MEMBER _weight)
+
+public:
+    QuickColumnDefinition(QQuickItem *parent = 0);
+
+protected:
+    qreal
+        _weight;
+};
 
 class QuickGridStarAttached : public QObject
 {
@@ -64,40 +99,15 @@ public:
 
     static QuickGridStarAttached *qmlAttachedProperties(QObject *object);
 
+    static void registerTypes();
+
 protected:
     void componentComplete() Q_DECL_OVERRIDE;
-};
+    void itemChange(ItemChange change, const ItemChangeData &value) Q_DECL_OVERRIDE;
+    bool event(QEvent *e) Q_DECL_OVERRIDE;
 
-class QuickRowDefinition : public QQuickItem
-{
-    friend class QuickGridStar;
-
-    Q_OBJECT
-
-    Q_PROPERTY(qreal weight MEMBER _weight)
-
-public:
-    QuickRowDefinition(QQuickItem *parent = 0);
-
-protected:
-    qreal
-        _weight;
-};
-
-class QuickColumnDefinition : public QQuickItem
-{
-    friend class QuickGridStar;
-
-    Q_OBJECT
-
-    Q_PROPERTY(qreal weight MEMBER _weight)
-
-public:
-    QuickColumnDefinition(QQuickItem *parent = 0);
-
-protected:
-    qreal
-        _weight;
+private:
+    void updateGeometry();
 };
 
 QML_DECLARE_TYPEINFO(QuickGridStar, QML_HAS_ATTACHED_PROPERTIES)
