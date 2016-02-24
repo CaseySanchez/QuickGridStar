@@ -94,23 +94,11 @@ bool QuickGridStar::event(QEvent *e)
 
 void QuickGridStar::updateGeometry()
 {
+    static QQuickWindow
+        *win = window();
+
     QRectF
-        rect;
-
-    QObject
-        *parentObject = QObject::parent();
-
-    if(QString(parentObject->metaObject()->className()).contains("ApplicationWindow"))
-    {
-        QQuickWindow
-            *window = qobject_cast<QQuickWindow *>(parentObject);
-
-        rect = QRectF(QPointF(0.f, 0.f), QSizeF(window->width(), window->height()));
-    }
-    else
-    {
-        rect = QRectF(QPointF(0.f, 0.f), QSizeF(width(), height()));
-    }
+        rect(QPointF(0.f, 0.f), win == (QQuickWindow *)parent() ? QSizeF(win->width(), win->height()) : QSizeF(width(), height()));
 
     for(QuickGridItem *item : _items)
     {
