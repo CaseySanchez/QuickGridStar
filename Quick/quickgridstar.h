@@ -55,6 +55,8 @@ class QuickGridStarAttached : public QObject
 public:
     QuickGridStarAttached(QObject *object);
 
+    bool use();
+
 protected:
     int
         _row,
@@ -71,18 +73,12 @@ class QuickGridStar : public QQuickItem
     {
         QQuickItem
             *_item;
-        int
-            _row,
-            _column,
-            _rowSpan,
-            _columnSpan;
+        QuickGridStarAttached
+            *_attached;
 
-        QuickGridItem(QQuickItem *item, int row, int column, int rowSpan, int columnSpan) :
+        QuickGridItem(QQuickItem *item, QuickGridStarAttached *attached) :
             _item(item),
-            _row(row),
-            _column(column),
-            _rowSpan(rowSpan),
-            _columnSpan(columnSpan)
+            _attached(attached)
         {
         }
     };

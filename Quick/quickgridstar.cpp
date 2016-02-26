@@ -14,11 +14,16 @@ QuickColumnDefinition::QuickColumnDefinition(QQuickItem *parent) :
 
 QuickGridStarAttached::QuickGridStarAttached(QObject *object) :
     QObject(object),
-    _row(0),
-    _column(0),
+    _row(~0),
+    _column(~0),
     _rowSpan(1),
     _columnSpan(1)
 {
+}
+
+bool QuickGridStarAttached::use()
+{
+    return (_row != ~0 && _column != ~0);
 }
 
 QuickGridStar::QuickGridStar(QQuickItem *parent) :
@@ -63,13 +68,16 @@ void QuickGridStar::componentComplete()
             QuickGridStarAttached
                 *attached = qobject_cast<QuickGridStarAttached *>(qmlAttachedPropertiesObject<QuickGridStar>(child));
 
-            _items << new QuickGridItem(child, attached->_row, attached->_column, attached->_rowSpan, attached->_columnSpan);
+            if(attached->use())
+            {
+                _items << new QuickGridItem(child, attached);
+            }
         }
     }
 
     for(QuickGridItem *item : _items)
     {
-        _gridDefinition.calculateBounds(item->_row, item->_column, item->_rowSpan, item->_columnSpan);
+        _gridDefinition.calculateBounds(item->_attached->_row, item->_attached->_column, item->_attached->_rowSpan, item->_attached->_columnSpan);
     }
 
     QQuickItem::componentComplete();
@@ -124,7 +132,7 @@ void QuickGridStar::updateGeometry()
     for(QuickGridItem *item : _items)
     {
         QRectF
-            cellRect(_gridDefinition.cellRect(rect, item->_row, item->_column, item->_rowSpan, item->_columnSpan));
+            cellRect(_gridDefinition.cellRect(rect, item->_attached->_row, item->_attached->_column, item->_attached->_rowSpan, item->_attached->_columnSpan));
 
         item->_item->setPosition(cellRect.topLeft());
         item->_item->setWidth(cellRect.width());
