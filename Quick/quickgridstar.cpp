@@ -14,16 +14,12 @@ QuickColumnDefinition::QuickColumnDefinition(QQuickItem *parent) :
 
 QuickGridStarAttached::QuickGridStarAttached(QObject *object) :
     QObject(object),
-    _row(~0),
-    _column(~0),
+    _ignore(false),
+    _row(0),
+    _column(0),
     _rowSpan(1),
     _columnSpan(1)
 {
-}
-
-bool QuickGridStarAttached::use()
-{
-    return (_row != ~0 && _column != ~0);
 }
 
 QuickGridStar::QuickGridStar(QQuickItem *parent) :
@@ -68,7 +64,7 @@ void QuickGridStar::componentComplete()
             QuickGridStarAttached
                 *attached = qobject_cast<QuickGridStarAttached *>(qmlAttachedPropertiesObject<QuickGridStar>(child));
 
-            if(attached->use())
+            if(!attached->_ignore)
             {
                 _items << new QuickGridItem(child, attached);
             }

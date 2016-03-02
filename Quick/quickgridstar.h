@@ -18,7 +18,7 @@ class QuickRowDefinition : public QQuickItem
     Q_PROPERTY(qreal weight MEMBER _weight)
 
 public:
-    QuickRowDefinition(QQuickItem *parent = 0);
+    QuickRowDefinition(QQuickItem *parent = nullptr);
 
 protected:
     qreal
@@ -34,7 +34,7 @@ class QuickColumnDefinition : public QQuickItem
     Q_PROPERTY(qreal weight MEMBER _weight)
 
 public:
-    QuickColumnDefinition(QQuickItem *parent = 0);
+    QuickColumnDefinition(QQuickItem *parent = nullptr);
 
 protected:
     qreal
@@ -47,6 +47,7 @@ class QuickGridStarAttached : public QObject
 
     Q_OBJECT
 
+    Q_PROPERTY(bool ignore MEMBER _ignore)
     Q_PROPERTY(int row MEMBER _row)
     Q_PROPERTY(int column MEMBER _column)
     Q_PROPERTY(int rowSpan MEMBER _rowSpan)
@@ -55,9 +56,9 @@ class QuickGridStarAttached : public QObject
 public:
     QuickGridStarAttached(QObject *object);
 
-    bool use();
-
 protected:
+    bool
+        _ignore;
     int
         _row,
         _column,
@@ -90,7 +91,7 @@ class QuickGridStar : public QQuickItem
         _gridDefinition;
 
 public:
-    QuickGridStar(QQuickItem *parent = 0);
+    QuickGridStar(QQuickItem *parent = nullptr);
     ~QuickGridStar();
 
     static QuickGridStarAttached *qmlAttachedProperties(QObject *object);
