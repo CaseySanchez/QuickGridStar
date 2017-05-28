@@ -2,11 +2,6 @@
 
 ---
 
-### Git Repository
-https://github.com/Tannz0rz/GridStarLayout/tree/master/Quick
-
----
-
 ### Description
 The GridStar layout is a clone of the Windows Presentation Foundation's "Grid" type with star sizing capabilities, where each row and column is defined as a weighted proportion of the available space. This allows absolute control over how you want your layout to look.
 
