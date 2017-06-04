@@ -34,12 +34,12 @@ The GridStar layout is a clone of the Windows Presentation Foundation's "Grid" t
 | `rowCount` | `int` | `None` | Returns the number of rows in the grid definition. |
 | `columnCount` | `int` | `None` | Returns the number of columns in the grid definition. |
 | `itemsAt` | `QVariant` | `int row, int column` | Returns a Javascript array of the items at the cell of `row` and `column`. |
-| `addItem` | `void` | `QObject *object, int row = 0, int column = 0, int rowSpan = 1, int columnSpan = 1` | Adds `object` to the grid at the cell of `row` and `column` with the spans of `rowSpan` and `columnSpan`. |
+| `addItem` | `void` | `QObject *object, int row, int column, int rowSpan, int columnSpan` | Adds `object` to the grid at the cell of `row` and `column` with the spans of `rowSpan` and `columnSpan`. Default `rowSpan` value is `1`. Default `columnSpan` value is `1`.|
 | `removeItem` | `bool` | `QObject *object` | Removes `object` from the grid. |
-| `addRowDefinition` | `void` | `float weight = 1.0f, int row = -1` | Adds a row definition of `weight` at `row`, default `row` value of `-1` adds the definition to the end. |
-| `addColumnDefinition` | `void` | `float weight = 1.0f, int column = -1` | Adds a column definition of `weight` at `column`, default `column` value of `-1` adds the definition to the end. |
-| `removeRowDefinition` | `void` | `int row = -1` | Removes the definition at `row`, default `row` value of `-1`removes the last definition. |
-| `removeColumnDefinition` | `void` | `int column = -1` | Removes the definition at `column`, default `column` value of `-1`removes the last definition. |
+| `addRowDefinition` | `void` | `float weight, int row` | Adds a row definition of `weight` at `row`. Default `weight` value is `1.0f`. Default `row` value is `-1`, adds the definition to the end. |
+| `addColumnDefinition` | `void` | `float weight, int column` | Adds a column definition of `weight` at `column`. Default `weight` value is `1.0f`. Default `column` value is `-1`, adds the definition to the end. |
+| `removeRowDefinition` | `void` | `int row` | Removes the definition at `row`. Default `row` value is `-1`, removes the last definition. |
+| `removeColumnDefinition` | `void` | `int column` | Removes the definition at `column`. Default `column` value is `-1`, removes the last definition. |
 
 ---
 
