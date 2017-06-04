@@ -33,23 +33,26 @@ class QuickGridDefinition
 public:
     QuickGridDefinition();
 
-    void addRowDefinition(qreal size = 1.0f);
-    void addColumnDefinition(qreal size = 1.0f);
+    void addRowDefinition(qreal weight = 1.0f, qint32 row = -1);
+    void addColumnDefinition(qreal weight = 1.0f, qint32 column = -1);
 
-    int rowCount() const;
-    int columnCount() const;
+    void removeRowDefinition(qint32 row = -1);
+    void removeColumnDefinition(qint32 column = -1);
 
-    qreal rowOffset(int index);
-    qreal columnOffset(int index);
+    qint32 rowCount() const;
+    qint32 columnCount() const;
 
-    qreal rowWeight(int index);
-    qreal columnWeight(int index);
+    qreal rowOffset(qint32 index);
+    qreal columnOffset(qint32 index);
 
-    QPointF cellPoint(QRectF rect, int row, int column);
-    QSizeF cellSize(QRectF rect, int row, int column, int rowSpan, int columnSpan);
-    QRectF cellRect(QRectF rect, int row, int column, int rowSpan = 1, int columnSpan = 1);
+    qreal rowWeight(qint32 index);
+    qreal columnWeight(qint32 index);
 
-    void calculateBounds(int &row, int &column, int &rowSpan, int &columnSpan);
+    QPointF cellPoint(QRectF rect, qint32 row, qint32 column);
+    QSizeF cellSize(QRectF rect, qint32 row, qint32 column, qint32 rowSpan, qint32 columnSpan);
+    QRectF cellRect(QRectF rect, qint32 row, qint32 column, qint32 rowSpan = 1, qint32 columnSpan = 1);
+
+    void calculateBounds(qint32 &row, qint32 &column, qint32 &rowSpan, qint32 &columnSpan);
 };
 
 #endif // QUICKGRIDDEFINITION_H
