@@ -97,7 +97,7 @@ public:
 
     Q_INVOKABLE QVariant itemsAt(qint32 row, qint32 column);
 
-    Q_INVOKABLE void addItem(QObject *object, qint32 row = 0, qint32 column = 0, qint32 rowSpan = 1, qint32 columnSpan = 1);
+    Q_INVOKABLE void addItem(QObject *object, qint32 row, qint32 column, qint32 rowSpan = 1, qint32 columnSpan = 1);
     Q_INVOKABLE bool removeItem(QObject *object);
 
     Q_INVOKABLE void addRowDefinition(qreal weight = 1.0f, qint32 row = -1);
