@@ -2,13 +2,13 @@
 
 QQuickRowDefinition::QQuickRowDefinition(QQuickItem *parent) :
     QQuickItem(parent),
-    m_weight(1.0f)
+    m_weight(1.0)
 {
 }
 
 QQuickColumnDefinition::QQuickColumnDefinition(QQuickItem *parent) :
     QQuickItem(parent),
-    m_weight(1.0f)
+    m_weight(1.0)
 {
 }
 
@@ -203,6 +203,26 @@ void QQuickGridStar::removeColumnDefinition(qint32 column)
     polish();
 }
 
+qreal QQuickGridStar::getRowSpacing()
+{
+    return m_rowSpacing;
+}
+
+qreal QQuickGridStar::getColumnSpacing()
+{
+    return m_columnSpacing;
+}
+
+void QQuickGridStar::setRowSpacing(qreal rowSpacing)
+{
+    m_rowSpacing = rowSpacing;
+}
+
+void QQuickGridStar::setColumnSpacing(qreal columnSpacing)
+{
+    m_columnSpacing = columnSpacing;
+}
+
 void QQuickGridStar::componentComplete()
 {
     QSizeF
@@ -229,6 +249,28 @@ void QQuickGridStar::componentComplete()
         }
 
         setSize(size);
+    }
+
+    if(m_rowSpacing > 0.0)
+    {
+        qreal
+            weight = m_rowSpacing / size.height();
+
+        for(qint32 i = 0, rows = rowCount() - 1; i < rows; i++)
+        {
+            addRowDefinition(weight, i * 2 + 1);
+        }
+    }
+
+    if(m_columnSpacing > 0.0)
+    {
+        qreal
+            weight = m_columnSpacing / size.height();
+
+        for(qint32 i = 0, columns = columnCount() - 1; i < columns; i++)
+        {
+            addColumnDefinition(weight, i * 2 + 1);
+        }
     }
 
     QQuickItem::componentComplete();
@@ -289,7 +331,7 @@ void QQuickGridStar::updatePolish()
         size(width(), height());
 
     QRectF
-        rect(QPointF(0.0f, 0.0f), size);
+        rect(QPointF(0.0, 0.0), size);
 
     for(QQuickItem *item : m_items)
     {
@@ -313,6 +355,8 @@ void QQuickGridStar::updatePolish()
 
             item->setPosition(cellRect.topLeft());
             item->setSize(cellRect.size());
+
+            emit attached->layout();
         }
     }
 }
