@@ -67,6 +67,9 @@ public:
     void setRowSpan(qint32 rowSpan);
     void setColumnSpan(qint32 columnSpan);
 
+signals:
+    void layout();
+
 protected:
     bool
         m_ignore,
@@ -90,7 +93,11 @@ class QQuickGridStar : public QQuickItem
     QQuickGridDefinition
         m_gridDefinition;
 
+    Q_PROPERTY(qreal rowSpacing READ getRowSpacing WRITE setRowSpacing)
+    Q_PROPERTY(qreal columnSpacing READ getColumnSpacing WRITE setColumnSpacing)
+
 public:
+
     QQuickGridStar(QQuickItem *parent = nullptr);
     ~QQuickGridStar();
 
@@ -105,6 +112,12 @@ public:
     Q_INVOKABLE void removeRowDefinition(qint32 row = -1);
     Q_INVOKABLE void removeColumnDefinition(qint32 column = -1);
 
+    qreal getRowSpacing();
+    qreal getColumnSpacing();
+
+    void setRowSpacing(qreal rowSpacing);
+    void setColumnSpacing(qreal columnSpacing);
+
     static QQuickGridStarAttached *qmlAttachedProperties(QObject *object);
 
 protected:
@@ -112,6 +125,10 @@ protected:
     void itemChange(ItemChange change, const ItemChangeData &value) Q_DECL_OVERRIDE;
     void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry) Q_DECL_OVERRIDE;
     void updatePolish() Q_DECL_OVERRIDE;
+
+    qreal
+        m_rowSpacing,
+        m_columnSpacing;
 };
 
 QML_DECLARE_TYPEINFO(QQuickGridStar, QML_HAS_ATTACHED_PROPERTIES)
