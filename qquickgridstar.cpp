@@ -265,7 +265,7 @@ void QQuickGridStar::componentComplete()
     if(m_columnSpacing > 0.0)
     {
         qreal
-            weight = m_columnSpacing / size.height();
+            weight = m_columnSpacing / size.width();
 
         for(qint32 i = 0, columns = columnCount() - 1; i < columns; i++)
         {
