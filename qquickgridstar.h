@@ -68,12 +68,12 @@ public:
     void setColumnSpan(qint32 columnSpan);
 
 signals:
-    void layout();
+    void layoutChanged();
 
 protected:
     bool
-        m_ignore,
-        m_dirty;
+        m_dirty,
+        m_ignore;
     qint32
         m_row,
         m_column,
@@ -96,8 +96,10 @@ class QQuickGridStar : public QQuickItem
     Q_PROPERTY(qreal rowSpacing READ getRowSpacing WRITE setRowSpacing)
     Q_PROPERTY(qreal columnSpacing READ getColumnSpacing WRITE setColumnSpacing)
 
-public:
+    bool validRow(qint32 row);
+    bool validColumn(qint32 column);
 
+public:
     QQuickGridStar(QQuickItem *parent = nullptr);
     ~QQuickGridStar();
 
@@ -106,8 +108,8 @@ public:
 
     Q_INVOKABLE QVariant itemsAt(qint32 row, qint32 column);
 
-    Q_INVOKABLE void addRowDefinition(qreal weight = 1.0f, qint32 row = -1);
-    Q_INVOKABLE void addColumnDefinition(qreal weight = 1.0f, qint32 column = -1);
+    Q_INVOKABLE void addRowDefinition(qreal weight = 1.0, qint32 row = -1);
+    Q_INVOKABLE void addColumnDefinition(qreal weight = 1.0, qint32 column = -1);
 
     Q_INVOKABLE void removeRowDefinition(qint32 row = -1);
     Q_INVOKABLE void removeColumnDefinition(qint32 column = -1);
