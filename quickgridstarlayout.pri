@@ -1,9 +1,7 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += \
-    $$PWD/qquickgridstar.h \
-    $$PWD/qquickgriddefinition.h
+    $$PWD/qquickgridstar.h
 
 SOURCES += \
-    $$PWD/qquickgridstar.cpp \
-    $$PWD/qquickgriddefinition.cpp
+    $$PWD/qquickgridstar.cpp
