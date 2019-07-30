@@ -28,16 +28,24 @@ The GridStar layout is a clone of the Windows Presentation Foundation's "Grid" t
 | `column` | `int` | Specifies the column in which the attached Item is positioned. Default value is `0`.  |
 | `rowSpan` | `int` | Defines how many rows the attached Item will span/occupy. Default value is `1`. Values less than or equal to `0` will span the total remaining space minus that value. |
 | `columnSpan` | `int` | Defines how many columns the attached Item will span/occupy. Default value is `1`. Values less than or equal to `0` will span the total remaining space minus that value.  |
+#### Properties 
+| Name | Type | Description |
+| --- | --- | --- |
+| `rowSpacing` | `real` | Defines the spacing between rows in pixels. |
+| `columnSpacing` | `real` | Defines the spacing between columns in pixels. |
 #### Methods
 | Name | Return Type | Parameters | Description |
 | --- | --- | --- | --- |
 | `rowCount` | `int` | `None` | Returns the number of rows in the grid definition. |
 | `columnCount` | `int` | `None` | Returns the number of columns in the grid definition. |
 | `itemsAt` | `QVariant` | `int row, int column` | Returns a Javascript array of the items at the cell of `row` and `column`. |
-| `addRowDefinition` | `void` | `float weight, int row` | Adds a row definition of `weight` at `row`. Default `weight` value is `1.0f`. Default `row` value is `-1`, adds the definition to the end. |
-| `addColumnDefinition` | `void` | `float weight, int column` | Adds a column definition of `weight` at `column`. Default `weight` value is `1.0f`. Default `column` value is `-1`, adds the definition to the end. |
-| `removeRowDefinition` | `void` | `int row` | Removes the definition at `row`. Default `row` value is `-1`, removes the last definition. |
-| `removeColumnDefinition` | `void` | `int column` | Removes the definition at `column`. Default `column` value is `-1`, removes the last definition. |
+| `getRow` | `QQuickItem *` | `int row` | Get the row definition at `row`. |
+| `getColumn` | `QQuickItem *` | `int column` | Get the column definition at `column`. |
+| `addRow` | `QQuickItem *` | `float weight` | Adds and returns a row definition of weight `weight`. |
+| `addColumn` | `QQuickItem *` | `float weight` | Adds and returns a column definition of weight `weight`. |
+| `clearRows` | `void` | `None` | Clears and deletes all row definitions. |
+| `clearColumns` | `void` | `None` | Clears and deletes all column definitions. |
+| `clearItems` | `void` | `None` | Clears and deletes all items positioned by the grid. |
 
 ---
 
