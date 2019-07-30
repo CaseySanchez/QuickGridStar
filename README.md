@@ -1,4 +1,4 @@
-# QML GridStar Layout
+# Qt Quick GridStar layout
 
 ---
 
@@ -50,7 +50,7 @@ The GridStar layout is a clone of the Windows Presentation Foundation's "Grid" t
 ---
 
 ### Registration
-Add `include("GridStarLayout-master/quickgridstarlayout.pri")` to your project.pro, change `"GridStarLayout-master"` to the name of your GridStarLayout directory accordingly.
+Add `include("QuickGridStar-master/quickgridstar.pri")` to your project.pro, change `"QuickGridStar-master"` to the name of your QuickGridStar directory accordingly.
 
 ---
 
