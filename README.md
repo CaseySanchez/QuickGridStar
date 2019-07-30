@@ -41,8 +41,8 @@ The GridStar layout is a clone of the Windows Presentation Foundation's "Grid" t
 | `itemsAt` | `QVariant` | `int row, int column` | Returns a Javascript array of the items at the cell of `row` and `column`. |
 | `getRow` | `QQuickItem *` | `int row` | Get the row definition at `row`. |
 | `getColumn` | `QQuickItem *` | `int column` | Get the column definition at `column`. |
-| `addRow` | `QQuickItem *` | `float weight` | Adds and returns a row definition of weight `weight`. |
-| `addColumn` | `QQuickItem *` | `float weight` | Adds and returns a column definition of weight `weight`. |
+| `addRow` | `QQuickItem *` | `real weight` | Adds and returns a row definition of weight `weight`. |
+| `addColumn` | `QQuickItem *` | `real weight` | Adds and returns a column definition of weight `weight`. |
 | `clearRows` | `void` | `None` | Clears and deletes all row definitions. |
 | `clearColumns` | `void` | `None` | Clears and deletes all column definitions. |
 | `clearItems` | `void` | `None` | Clears and deletes all items positioned by the grid. |
