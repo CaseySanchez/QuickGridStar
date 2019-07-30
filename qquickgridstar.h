@@ -1,10 +1,11 @@
 #ifndef QQUICKGRIDSTAR_H
 #define QQUICKGRIDSTAR_H
 
+#include <QObject>
+#include <QList>
+#include <QRegularExpression>
 #include <QQuickItem>
 #include <QQuickWindow>
-
-#include "qquickgriddefinition.h"
 
 class QQuickGridStar;
 
@@ -14,14 +15,21 @@ class QQuickRowDefinition : public QQuickItem
 
     Q_OBJECT
 
-    Q_PROPERTY(qreal weight MEMBER m_weight)
+    Q_PROPERTY(qreal weight READ getWeight WRITE setWeight NOTIFY rowChanged)
 
 public:
     QQuickRowDefinition(QQuickItem *parent = nullptr);
 
+    qreal getWeight();
+    void setWeight(qreal weight);
+
+signals:
+    void rowChanged(QQuickRowDefinition *definition, const qreal &oldWeight);
+
 protected:
     qreal
-        m_weight;
+        m_weight,
+        m_offset;
 };
 
 class QQuickColumnDefinition : public QQuickItem
@@ -30,14 +38,21 @@ class QQuickColumnDefinition : public QQuickItem
 
     Q_OBJECT
 
-    Q_PROPERTY(qreal weight MEMBER m_weight)
+    Q_PROPERTY(qreal weight READ getWeight WRITE setWeight NOTIFY columnChanged)
 
 public:
     QQuickColumnDefinition(QQuickItem *parent = nullptr);
 
+    qreal getWeight();
+    void setWeight(qreal weight);
+
+signals:
+    void columnChanged(QQuickColumnDefinition *definition, const qreal &oldWeight);
+
 protected:
     qreal
-        m_weight;
+        m_weight,
+        m_offset;
 };
 
 class QQuickGridStarAttached : public QObject
@@ -87,32 +102,50 @@ class QQuickGridStar : public QQuickItem
 {
     Q_OBJECT
 
-    QList<QQuickItem *>
-        m_items;
-
-    QQuickGridDefinition
-        m_gridDefinition;
-
     Q_PROPERTY(qreal rowSpacing READ getRowSpacing WRITE setRowSpacing)
     Q_PROPERTY(qreal columnSpacing READ getColumnSpacing WRITE setColumnSpacing)
 
-    bool validRow(qint32 row);
-    bool validColumn(qint32 column);
+    QList<QQuickItem *>
+        m_items;
+
+    QList<QQuickRowDefinition *>
+        m_rows;
+    QList<QQuickColumnDefinition *>
+        m_columns;
+
+    qreal
+        m_rowSize,
+        m_columnSize,
+        m_invRowSize,
+        m_invColumnSize;
+
+    qreal rowOffset(qint32 index);
+    qreal columnOffset(qint32 index);
+
+    qreal rowWeight(qint32 index);
+    qreal columnWeight(qint32 index);
+
+    QPointF cellPoint(QRectF rect, qint32 row, qint32 column);
+    QSizeF cellSize(QRectF rect, qint32 row, qint32 column, qint32 rowSpan, qint32 columnSpan);
+    QRectF cellRect(QRectF rect, qint32 row, qint32 column, qint32 rowSpan = 1, qint32 columnSpan = 1);
 
 public:
     QQuickGridStar(QQuickItem *parent = nullptr);
-    ~QQuickGridStar();
 
     Q_INVOKABLE qint32 rowCount();
     Q_INVOKABLE qint32 columnCount();
 
     Q_INVOKABLE QVariant itemsAt(qint32 row, qint32 column);
 
-    Q_INVOKABLE void addRowDefinition(qreal weight = 1.0, qint32 row = -1);
-    Q_INVOKABLE void addColumnDefinition(qreal weight = 1.0, qint32 column = -1);
+    Q_INVOKABLE QQuickItem *getRow(qint32 row);
+    Q_INVOKABLE QQuickItem *getColumn(qint32 column);
 
-    Q_INVOKABLE void removeRowDefinition(qint32 row = -1);
-    Q_INVOKABLE void removeColumnDefinition(qint32 column = -1);
+    Q_INVOKABLE QQuickItem *addRow(qreal weight);
+    Q_INVOKABLE QQuickItem *addColumn(qreal weight);
+
+    Q_INVOKABLE void clearRows();
+    Q_INVOKABLE void clearColumns();
+    Q_INVOKABLE void clearItems();
 
     qreal getRowSpacing();
     qreal getColumnSpacing();
@@ -121,6 +154,10 @@ public:
     void setColumnSpacing(qreal columnSpacing);
 
     static QQuickGridStarAttached *qmlAttachedProperties(QObject *object);
+
+protected slots:
+    void onRowChanged(QQuickRowDefinition *definition, const qreal &oldWeight);
+    void onColumnChanged(QQuickColumnDefinition *definition, const qreal &oldWeight);
 
 protected:
     void componentComplete() Q_DECL_OVERRIDE;
